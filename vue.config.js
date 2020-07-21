@@ -1,6 +1,11 @@
 const webpackConfig = require('./config/webpack.config.js')
 const CompressionWebpackPlugin = require('compression-webpack-plugin')
 const isProd = process.env.NODE_ENV === 'production'
+const path = require('path')
+
+function resolve(dir) {
+  return path.join(__dirname, dir)
+}
 
 // 开发模式代理地址 TODO: 按需修改
 const DEV_URL = 'http://127.0.0.1'
@@ -25,9 +30,27 @@ module.exports = {
   chainWebpack: config => {
     // 项目标题
     config.plugin('html').tap(args => {
-      args[0].title = '前端有的玩'
+      args[0].title = 'vue-vant'
       return args
     })
+
+    // set svg-sprite-loader
+    config.module
+      .rule('svg')
+      .exclude.add(resolve('src/icons'))
+      .end()
+    config.module
+      .rule('icons')
+      .test(/\.svg$/)
+      .include.add(resolve('src/icons'))
+      .end()
+      .use('svg-sprite-loader')
+      .loader('svg-sprite-loader')
+      .options({
+        symbolId: 'icon-[name]'
+      })
+      .end()
+
     webpackConfig(config)
   },
   // 不需要生产环境的 source map

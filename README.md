@@ -49,7 +49,9 @@
 ### 文档
 在开发中，一种功能可能会有多种选择，为了满足大家多种选择的需求，本框架特意添加的文档模块，对存在多种方案配置的内容通过文档的方式记录下来，方便大家切换
 
+### 自动化svg
 
+svgo svg-sprite-loader
 
 ## 所有命令
 
@@ -75,6 +77,7 @@ yarn lint
 ```
 
 ### 常见问题
+
 #### 1. 启动项目`eslint`报 `Delete CR prettier/prettier`
 
 这个是window 和 mac 换行符不同导致的，为了保持一致，当前系统统一制定换行符为lf,可以在导出项目之前配置
@@ -87,6 +90,7 @@ git config --global core.autocrlf input
 或者也可以打开.editorconfig 文件，注释掉  `end_of_line = lf`, 注释方式为在代码前面加 #
 
 #### 2. 使用装饰器可能会提示 `Property assignment expected.Vetur(1136)`
+
 因为本项目使用`eslint`进行代码格式检查，所以可以关闭`vetur`验证`script`的能力，请在`vscode settings`里面添加下面代码
 ```shell
 "vetur.validation.script": false,
